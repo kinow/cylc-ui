@@ -57,6 +57,7 @@ import { createWidgetId } from '@/components/cylc/workflow/index'
 import Lumino from '@/components/cylc/workflow/Lumino'
 import Toolbar from '@/components/cylc/workflow/Toolbar'
 import CylcObjectMenu from '@/components/cylc/cylcObject/Menu'
+import GraphiQL from '@/views/GraphiQL'
 import MutationsView from '@/views/Mutations'
 import TreeView from '@/views/Tree'
 import { mapState } from 'vuex'
@@ -96,7 +97,8 @@ export default {
      */
     views: [
       TreeView,
-      MutationsView
+      MutationsView,
+      GraphiQL
     ]
   }),
   created () {
@@ -190,3 +192,14 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.workflow-panel {
+  #graphiql {
+    height: 100%;
+    .CodeMirror-gutters {
+      left: 0;
+    }
+  }
+}
+</style>

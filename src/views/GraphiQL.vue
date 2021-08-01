@@ -25,6 +25,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import GraphiQL from 'graphiql'
 import { fallbackGraphQLFetcher, graphQLFetcher } from '@/graphql/graphiql'
+import { mdiGraphql } from '@mdi/js'
 
 export default {
   name: 'GraphiQL',
@@ -37,7 +38,11 @@ export default {
   data () {
     return {
       fetcher: null,
-      subscription: null
+      subscription: null,
+      widget: {
+        title: 'graphiql',
+        icon: mdiGraphql
+      }
     }
   },
   mounted () {
