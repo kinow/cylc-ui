@@ -55,10 +55,18 @@ function applyDeltasAdded (added, workflow, lookup, options) {
       items.forEach(addedData => {
         try {
           const existingData = lookup[addedData.id]
-          const createNodeFunction = ADDED[addedKey][0]
-          const treeFunction = ADDED[addedKey][1]
-          const node = createNodeFunction(existingData)
-          CylcTree[treeFunction](node, workflow, options)
+          if (existingData) {
+            const createNodeFunction = ADDED[addedKey][0]
+            const treeFunction = ADDED[addedKey][1]
+            const node = createNodeFunction(existingData)
+            CylcTree[treeFunction](node, workflow, options)
+          } else {
+            // eslint-disable-next-line no-console
+            console.debug(`Added node [${addedData.id}] not found in workflow lookup`,
+              addedData,
+              workflow,
+              lookup)
+          }
         } catch (error) {
           result.errors.push([
             'Error applying added-delta, see browser console logs for more. Please reload your browser tab to retrieve the full flow state',
@@ -100,18 +108,17 @@ function applyDeltasUpdated (updated, workflow, lookup, options) {
       updated[updatedKey].forEach(updatedData => {
         try {
           const existingData = lookup[updatedData.id]
-          if (!existingData) {
-            result.errors.push([
-              `Updated node [${updatedData.id}] not found in workflow lookup`,
-              updatedData,
-              workflow,
-              lookup
-            ])
-          } else {
+          if (existingData) {
             const updateNodeFunction = UPDATED[updatedKey][0]
             const treeFunction = UPDATED[updatedKey][1]
             const node = updateNodeFunction(existingData)
             CylcTree[treeFunction](node, workflow, options)
+          } else {
+            // eslint-disable-next-line no-console
+            console.debug(`Updated node [${updatedData.id}] not found in workflow lookup`,
+              updatedData,
+              workflow,
+              lookup)
           }
         } catch (error) {
           result.errors.push([
