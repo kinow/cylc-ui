@@ -273,7 +273,7 @@ class WorkflowService {
       }
       this.stopSubscription(subscription, true)
     }
-    if (subscription.query.isDelta === false & subscription.query.isGlobalCallback === false) {
+    if (subscription.query.isDelta === false && subscription.query.isGlobalCallback === false) {
       try {
         // Then start subscription.
         subscription.observable = this.startCylcSubscription(
