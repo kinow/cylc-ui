@@ -72,7 +72,7 @@ jobs:
           node-version: '16'
 
       - name: Test
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           start: yarn run serve --hide=CLIENT  # turn off build output because it's absurdly long
           wait-on: http://localhost:8080/
